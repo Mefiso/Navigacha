@@ -60,8 +60,17 @@ public class StickyMovement : MonoBehaviour
 
         Vector3 newPos = new Vector3(mousePos.x, mousePos.y, transform.position.z);
         RaycastHit2D hit = Physics2D.Linecast(transform.position, newPos, blockingLayer);
-        if (hit.transform == null)
-            rb2D.MovePosition(newPos);
+        while (hit.transform)
+        {
+            float hitHDirection = Mathf.Abs(Vector2.Dot(hit.normal, new Vector2(1, 0)));
+            if (hitHDirection > 0)
+                newPos.x = transform.position.x;
+            else
+                newPos.y = transform.position.y;
+            hit = Physics2D.Linecast(transform.position, newPos, blockingLayer);
+        }
+        rb2D.MovePosition(newPos);
+
     }
 
 
