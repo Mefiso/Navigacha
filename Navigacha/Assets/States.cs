@@ -28,9 +28,7 @@ public class MovableState : HeroState
             {
                 hero.follow = false;
                 // TODO: hide magic numbers
-                hero.transform.position = new Vector3(Mathf.Floor(hero.transform.position.x) + 0.5f,
-                                                Mathf.Floor(hero.transform.position.y) + 0.5f,
-                                                hero.transform.position.z);
+                hero.transform.position = Helpers.MapUtils.PositionToGrid(hero.transform.position);
                 hero.state = HeroState.idleState;
             } else
             {
