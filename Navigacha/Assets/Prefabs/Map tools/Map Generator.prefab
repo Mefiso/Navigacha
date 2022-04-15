@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1505210104583663070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1505210104583663068}
+  - component: {fileID: 1505210104583663069}
+  m_Layer: 0
+  m_Name: Map Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1505210104583663068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505210104583663070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.247879, y: 0.7442448, z: -30.259512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505210104583663069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505210104583663070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6e8d41caf87a249a77d9e007f3a05f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonGO: {fileID: 0}
+  entrancePrefab: {fileID: 0}
+  exitPrefab: {fileID: 0}
+  roomPrefab: {fileID: 0}
+  stagePrefab: {fileID: 0}
+  inputWaves: {fileID: 0}
+  inputDungeon: {fileID: 0}
+  obstaclePrefab: {fileID: 1964111637300742553, guid: 6676fef9b80b9b14fbf41260a72c4cd1, type: 3}
+  hazardPrefab: {fileID: 4627279278968598099, guid: 4d739f46ec30dc24f8214356f1ebf974, type: 3}
+  enemyPrefab: {fileID: 2564191398061521979, guid: 94ded8f8446dc2b4a82778f80aa009de, type: 3}
+  heroSpawnPrefab: {fileID: 0}
