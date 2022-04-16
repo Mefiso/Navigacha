@@ -235,7 +235,9 @@ public class MapGenerator : MonoBehaviour
     public void SaveDungeon()
     {
         string json = JsonUtility.ToJson(dungeon);
-        using (StreamWriter sr = new StreamWriter(dungeon.name + ".json"))
+        string path = Application.dataPath + "/" + dungeon.name;
+        Directory.CreateDirectory(path);
+        using (StreamWriter sr = new StreamWriter(path + "/" + dungeon.name + ".json"))
         {
             sr.Write(json);
         }
@@ -245,7 +247,8 @@ public class MapGenerator : MonoBehaviour
     public void SaveStage(int stage)
     {
         string json = JsonUtility.ToJson(stages[currentStage].Key);
-        using (StreamWriter sr = new StreamWriter(stage.ToString() + ".json"))
+        string path = Application.dataPath + "/" + dungeon.name;
+        using (StreamWriter sr = new StreamWriter(path + "/" + stage.ToString() + ".json"))
         {
             sr.Write(json);
         }
@@ -270,6 +273,7 @@ public class MapGenerator : MonoBehaviour
                 GameObject myLine = new GameObject();
                 myLine.name = UnityEngine.Random.Range(1, int.MaxValue).ToString();
                 myLine.tag = "line";
+                myLine.transform.parent = dungeonGO.transform;
                 myLine.transform.position = lineOrigin;
                 myLine.AddComponent<LineRenderer>();
                 myLine.AddComponent<BoxCollider2D>();

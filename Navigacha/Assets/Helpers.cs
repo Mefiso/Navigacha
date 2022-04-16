@@ -52,7 +52,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     }
 }
 
-[Serializable] public class DictStringAndInt : SerializableDictionary<string, int[]> { }
+[Serializable] public class DictStringAndInt : SerializableDictionary<string, SerializableList<int>> { }
 [Serializable] public class DictVector2AndString : SerializableDictionary<Vector2, string> { }
 
 

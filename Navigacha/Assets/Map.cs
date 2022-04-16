@@ -69,8 +69,8 @@ class Dungeon
     public int ID;
     public string name;
     [SerializeField] SerializableList<int> stagesID = new SerializableList<int>();
-    int plane = 0;
-    int dungeonType = 0;
+    public int plane;
+    public int dungeonType;
     [SerializeField] DictStringAndInt connections = new DictStringAndInt();
 
     public void GenerateID()
@@ -93,7 +93,10 @@ class Dungeon
 
     public void GenerateConnection(string name, int firstID, int secondID)
     {
-        connections.Add(name, new int[2] { firstID, secondID });
+        SerializableList<int> sl = new SerializableList<int>();
+        sl.list.Add(firstID);
+        sl.list.Add(secondID);
+        connections.Add(name,  sl);
     }
 
     public void RemoveConnection (string name)
