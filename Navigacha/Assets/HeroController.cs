@@ -40,7 +40,7 @@ public class HeroController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (Vector3.Distance(collision.transform.position, transform.position) < 0.5f)
+        if (Vector3.Distance(collision.transform.position, transform.position) < 0.5f * Helpers.MapUtils.SQUARE_SIZE)
         {
             Helpers.IUnit unit = collision.gameObject.GetComponent<Helpers.IUnit>();
             if (unit != null)
@@ -54,11 +54,11 @@ public class HeroController : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // TODO: Replace this for actual outer walls
-        if (mousePos.x < -3 || mousePos.x > 4)
+        if (mousePos.x < Helpers.MapUtils.L_BOUNDARY || mousePos.x > Helpers.MapUtils.R_BOUNDARY)
         {
             mousePos.x = transform.position.x;
         }
-         if (Mathf.Abs(mousePos.y) > 6)
+         if (Mathf.Abs(mousePos.y) > Helpers.MapUtils.V_BOUNDARY)
         {
             mousePos.y = transform.position.y;
         }
@@ -67,7 +67,7 @@ public class HeroController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Linecast(transform.position, newPos, blockingLayer);
         while (hit.transform)
         {
-            float hitHDirection = Mathf.Abs(Vector2.Dot(hit.normal, new Vector2(1, 0)));
+            float hitHDirection = Mathf.Abs(Vector2.Dot(hit.normal, Vector2.right));
             if (hitHDirection > 0)
                 newPos.x = transform.position.x;
             else
