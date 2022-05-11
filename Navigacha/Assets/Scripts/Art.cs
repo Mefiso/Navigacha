@@ -22,11 +22,12 @@ public enum ArtOrigin
  * P = push
  * A = attract
  * B1 to B7 = buff
- * P = orb or hazard
+ * I = orb or hazard (Interactable)
  * X = destroy obstacle or Trap
  *
  */
 
+[Serializable]
 class Art
 {
     string name;
@@ -37,12 +38,12 @@ class Art
     bool directional;
     int range;
 
-    SerializableList<SerializablePair<string, SerializableList<float>>[]> effectMatrix;
+    [SerializeField] SerializableList<SerializablePair<string, List<float>>[]> effectMatrix;
 
     // Power source
-    float[] statsDamage = new float[7];
-    float[] statsBuff = new float[7];
-    float[] statsHeal = new float[7];
+    [SerializeField] float[] statsDamage = new float[7];
+    [SerializeField] float[] statsBuff = new float[7];
+    [SerializeField] float[] statsHeal = new float[7];
 
     void Perform()
     {

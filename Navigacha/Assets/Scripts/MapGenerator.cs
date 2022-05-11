@@ -235,7 +235,7 @@ public class MapGenerator : MonoBehaviour
     public void SaveDungeon()
     {
         string json = JsonUtility.ToJson(dungeon);
-        string path = Application.dataPath + "/" + dungeon.name;
+        string path = Application.dataPath + "/Dungeons/" + dungeon.name;
         Directory.CreateDirectory(path);
         using (StreamWriter sr = new StreamWriter(path + "/" + dungeon.name + ".json"))
         {
@@ -247,7 +247,7 @@ public class MapGenerator : MonoBehaviour
     public void SaveStage(int stage)
     {
         string json = JsonUtility.ToJson(stages[currentStage].Key);
-        string path = Application.dataPath + "/" + dungeon.name;
+        string path = Application.dataPath + "/Dungeons/" + dungeon.name;
         using (StreamWriter sr = new StreamWriter(path + "/" + stage.ToString() + ".json"))
         {
             sr.Write(json);
