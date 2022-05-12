@@ -20,18 +20,19 @@ It takes place on a grid-like board map representing the dungeon. You have a tea
 
 The combat develops in turns. A turn has 2 phases:
 
-**__Move (Tactics) phase__**
+_**Move (Tactics) phase**_
 * In the move phase you can drag each of your units anywhere over the grid. 
 * Each unit has a timer during which they can move. The timer also ends if you let go of the character (you have to drag).  Timer starts once you press a unit. Timer duration depends on each unit’s speed. 
 * When one of your units passes through an enemy, it interacts with it.
 
-**__Skills (Arts) phase__**
+_**Skills (Arts) phase**_
+
 After the move phase, comes the skills/action phase. 
 * Each of your units can select a skill/spell (arts, in game) to cast.
 
 Once your turn is finished, the enemies will have their turn. Then, it’s your turn again.
 
-###Gacha and management
+### Gacha and management
 You are a Traveler climbing the Planes. Each of them contains several dungeons. To clear those dungeons, you’ll need to contract Heroes, summoned from across the already visited Planes.
 
 The gacha will be only for units (Heroes), all the equipment will come from looting in combat.
