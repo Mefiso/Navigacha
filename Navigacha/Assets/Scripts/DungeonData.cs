@@ -18,12 +18,12 @@ public struct Interactable
 class Stage
 {
     public int ID;
+    public DictVector2AndString squares = new DictVector2AndString();
 
     [SerializeField] int dungeonID;
     [SerializeField] int nWaves;
     [SerializeField] bool isExit = false;
     [SerializeField] bool isEntrance = false;
-    [SerializeField] DictVector2AndString squares = new DictVector2AndString();
     [SerializeField] List<int> enemyIDs = new List<int>();
     [SerializeField] List<int>[] waveSpawnPoints;
     [SerializeField] List<Interactable> interactables = new List<Interactable>();
@@ -50,15 +50,25 @@ class Stage
         isEntrance = true;
     }
 
+    public bool IsEntrance()
+    {
+        return isEntrance;
+    }
+
     public void MakeExit()
     {
         isExit = true;
     }
 
-    public void AddSquare(Vector2 coords, string type)
+    public bool IsExit()
+    {
+        return isExit;
+    }
+
+    public void AddSquare(Vector2Int coords, string type)
     {
         squares.Add(coords, type);
-        if (type == "H")
+        if (type.Equals("H"))
         {
             Interactable def = new Interactable();
             def.movable = false;
@@ -71,7 +81,7 @@ class Stage
         }
     }
 
-    public void RemoveSquare(Vector2 coords)
+    public void RemoveSquare(Vector2Int coords)
     {
         squares.Remove(coords);
     }
@@ -88,10 +98,10 @@ class Dungeon
 {
     public int ID;
     public string name;
-    [SerializeField] List<int> stagesID = new List<int>();
+    public List<int> stagesID = new List<int>();
     public int plane;
     public int dungeonType;
-    [SerializeField] DictStringAndIntList connections = new DictStringAndIntList();
+    public DictStringAndIntList connections = new DictStringAndIntList();
 
     public void GenerateID()
     {

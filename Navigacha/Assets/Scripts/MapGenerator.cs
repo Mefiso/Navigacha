@@ -122,7 +122,7 @@ public class MapGenerator : MonoBehaviour
                     Vector3 pos = Helpers.MapUtils.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                     GameObject go = Instantiate(currentPrefab, pos, Quaternion.identity);
                     go.transform.parent = stages[currentStage].Value.transform;
-                    stages[currentStage].Key.AddSquare(Helpers.MapUtils.GetSquareIn(pos), squareInfo);
+                    stages[currentStage].Key.AddSquare(Helpers.MapUtils.WorldToSquareCoords(pos), squareInfo);
 
                 }
                 else if (Input.GetMouseButtonDown(1))
@@ -131,7 +131,7 @@ public class MapGenerator : MonoBehaviour
                     Collider2D col = Physics2D.OverlapBox(pos, Vector2.zero, 0.0f);
                     if (col)
                     {
-                        stages[currentStage].Key.RemoveSquare(Helpers.MapUtils.GetSquareIn(pos));
+                        stages[currentStage].Key.RemoveSquare(Helpers.MapUtils.WorldToSquareCoords(pos));
                         Destroy(col.gameObject);
                     }
                 }
@@ -191,7 +191,7 @@ public class MapGenerator : MonoBehaviour
         Collider2D col = Physics2D.OverlapBox(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0.0f);
         if (col)
         {
-            if (col.tag == "line")
+            if (col.tag.Equals("line"))
             {
                 dungeon.RemoveConnection(col.name);
             }

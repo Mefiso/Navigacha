@@ -5,25 +5,52 @@ using UnityEngine;
 
 public class DungeonMap : MonoBehaviour
 {
-    [Header("Dungeon")]
-
-    public GameObject entrancePrefab;
-    public GameObject exitPrefab;
-    public GameObject roomPrefab;
+    public GameObject stagePrefab;
 
     private Dungeon dungeon;
+    private Dictionary<int, Map> stages;
+    private Map currentStage;
+
     // Start is called before the first frame update
     void Start()
     {
+        stages = new Dictionary<int, Map>();
+        // TODO: replace for actual map to load
         using (StreamReader sr = new StreamReader(Application.dataPath + "/Dungeons/gg/gg.json"))
         {
             string line = sr.ReadLine();
             dungeon = JsonUtility.FromJson<Dungeon>(line);
         }
+        LoadStages();
+
     }
 
     // Update is called once per frame
     void Update()
+    {
+
+    }
+
+    void LoadStages()
+    {
+        foreach (int sID in dungeon.stagesID)
+        {
+            GameObject s = Instantiate(stagePrefab);
+            s.name = sID.ToString();
+            Map sMap = s.GetComponent<Map>();
+            sMap.LoadStage();
+            stages.Add(sID, sMap);
+            if (sMap.IsEntrance())
+            {
+                currentStage = sMap;
+                sMap.GenerateMap();
+                sMap.gameObject.SetActive(true);
+            }
+
+        }
+    }
+
+    public void OpenStage()
     {
 
     }

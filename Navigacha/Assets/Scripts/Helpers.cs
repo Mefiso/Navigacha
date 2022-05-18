@@ -53,7 +53,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
 }
 
 [Serializable] public class DictStringAndIntList : SerializableDictionary<string, SerializableList<int>> { }
-[Serializable] public class DictVector2AndString : SerializableDictionary<Vector2, string> { }
+[Serializable] public class DictVector2AndString : SerializableDictionary<Vector2Int, string> { }
 
 [Serializable]
 public struct SerializablePair<TKey, TValue>
@@ -77,19 +77,25 @@ namespace Helpers
         public const int R_BOUNDARY = 4;
         public const int V_BOUNDARY = 6;
         public const int MAX_ENEMIES = 10;
+        public const int ROWS = V_BOUNDARY * 2;
+        public const int COLS = (R_BOUNDARY - L_BOUNDARY);
+        public const int N_SQUARES = ROWS * COLS;
 
-        static public Vector2 Square(int x, int y)
+        // Returns the 2D world position of a square.
+        static public Vector2 SquareToWorldCoords(int x, int y)
         {
             return new Vector2(L_BOUNDARY + (x + 0.5f) * SQUARE_SIZE,
                            V_BOUNDARY - (y + 0.5f) * SQUARE_SIZE);
         }
 
-        static public Vector2 GetSquareIn(Vector2 position)
+        // Gets the square corrdinates in a given position
+        static public Vector2Int WorldToSquareCoords(Vector2 position)
         {
-            return new Vector2(Mathf.Floor((position.x - L_BOUNDARY) / SQUARE_SIZE),
-                                Mathf.Floor((V_BOUNDARY - position.y) / SQUARE_SIZE));
+            return new Vector2Int((int)Mathf.Floor((position.x - L_BOUNDARY) / SQUARE_SIZE),
+                                (int)Mathf.Floor((V_BOUNDARY - position.y) / SQUARE_SIZE));
         }
 
+        // Centers a position in the corresponding square
         static public Vector3 PositionToGrid (Vector3 position)
         {
             return new Vector3(Mathf.Floor(position.x) + 0.5f*SQUARE_SIZE,
