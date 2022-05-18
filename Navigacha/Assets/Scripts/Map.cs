@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Unity.Jobs;
+using Unity.Collections;
+
 
 public class Map : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class Map : MonoBehaviour
 
     GameObject[,] map = new GameObject[Helpers.MapUtils.ROWS, Helpers.MapUtils.COLS];
     Stage stage;
+
+
     // Start is called before the first frame update
     void Start()
     {

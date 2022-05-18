@@ -8,13 +8,12 @@ public class DungeonMap : MonoBehaviour
     public GameObject stagePrefab;
 
     private Dungeon dungeon;
-    private Dictionary<int, Map> stages;
+    private Dictionary<int, Map> stages = new Dictionary<int, Map>();
     private Map currentStage;
 
     // Start is called before the first frame update
     void Start()
     {
-        stages = new Dictionary<int, Map>();
         // TODO: replace for actual map to load
         using (StreamReader sr = new StreamReader(Application.dataPath + "/Dungeons/gg/gg.json"))
         {
@@ -40,10 +39,10 @@ public class DungeonMap : MonoBehaviour
             Map sMap = s.GetComponent<Map>();
             sMap.LoadStage();
             stages.Add(sID, sMap);
+            sMap.GenerateMap();
             if (sMap.IsEntrance())
             {
                 currentStage = sMap;
-                sMap.GenerateMap();
                 sMap.gameObject.SetActive(true);
             }
 
