@@ -11,13 +11,14 @@ public class CombatController : MonoBehaviour
         ENEMY_PHASE
     }
 
-    public HeroController[] heroes;
-    public EnemyController[] enemies;
+    public HeroController[] heroes = new HeroController[4];
+    public List<EnemyController> enemies;
 
     private CombatPhase phase;
 
     // Start is called before the first frame update
-    void Start()
+
+    void OnEnable()
     {
         Debug.Log("Starting combat");
         phase = CombatPhase.MOVING_PHASE;

@@ -31,6 +31,7 @@ public class MovableState : HeroState
                 // TODO: hide magic numbers
                 hero.transform.position = Helpers.MapUtils.PositionToGrid(hero.transform.position);
                 hero.state = HeroState.idleState;
+                hero.currentStage.AddToPosition(hero.gameObject, Helpers.MapUtils.WorldToSquareCoords(hero.transform.position));
             } else
             {
                 hero.FollowMouse();
@@ -44,6 +45,7 @@ public class MovableState : HeroState
         if (Input.GetMouseButtonDown(0))
         {
             hero.follow = true;
+            hero.currentStage.RemoveObjectFromPosition(Helpers.MapUtils.WorldToSquareCoords(hero.transform.position));
         }
     }
 }

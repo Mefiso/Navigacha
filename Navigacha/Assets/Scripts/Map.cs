@@ -38,8 +38,10 @@ public class Map : MonoBehaviour
         }
     }
 
-    public void GenerateMap()
+    public void GenerateMap(CombatController combatController)
     {
+        combatController.enemies.Clear();
+        int heroCount = 0;
         foreach (var square in stage.squares)
         {
             Vector2Int position = square.Key;
@@ -60,16 +62,43 @@ public class Map : MonoBehaviour
             {
                 // TODO: Select correct enemy prefab
                 go = Instantiate(enemyPrefab, this.transform);
+                EnemyController e = go.GetComponent<EnemyController>();
+                e.stage = this;
+                combatController.enemies.Add(e);
                 // TODO: Add appropriate components to go
             }
             else if (square.Value[0].Equals('P'))
             {
                 // TODO: Program actual hero spawn
-                go = Instantiate(heroSpawnPrefab, this.transform);
+                go = combatController.heroes[heroCount++].gameObject;
+                go.GetComponent<HeroController>().currentStage = this;
+                go.SetActive(true);
             }
             go.transform.position = Helpers.MapUtils.SquareToWorldCoords(position.x, position.y);
             map[position.y, position.x] = go;
         }
+        combatController.gameObject.SetActive(true);
+    }
+
+    public GameObject GetGameObjectInSquare (Vector2Int position)
+    {
+        return map[position.y, position.x];
+    }
+
+    public void AddToPosition(GameObject obj, Vector2Int position)
+    {
+        map[position.y, position.x] = obj;
+    }
+
+    public void RemoveObjectFromPosition(Vector2Int position)
+    {
+        map[position.y, position.x] = null;
+    }
+
+    public void Move(Vector2Int origin, Vector2Int destination)
+    {
+        map[destination.y, destination.x] = map[origin.y, origin.x];
+        map[origin.y, origin.x] = null;
     }
 
     public bool IsEntrance() => stage.IsEntrance();

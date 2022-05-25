@@ -6,6 +6,9 @@ using UnityEngine;
 public class DungeonMap : MonoBehaviour
 {
     public GameObject stagePrefab;
+    public CombatController combatController;
+    // TODO: replace for actual hero loading
+    public HeroController[] heroes = new HeroController[4];
 
     private Dungeon dungeon;
     private Dictionary<int, Map> stages = new Dictionary<int, Map>();
@@ -20,8 +23,10 @@ public class DungeonMap : MonoBehaviour
             string line = sr.ReadLine();
             dungeon = JsonUtility.FromJson<Dungeon>(line);
         }
+        // TODO: replace for actual hero loading
+        combatController.heroes = new HeroController[4];
+        heroes.CopyTo(combatController.heroes, 0);
         LoadStages();
-
     }
 
     // Update is called once per frame
@@ -39,9 +44,9 @@ public class DungeonMap : MonoBehaviour
             Map sMap = s.GetComponent<Map>();
             sMap.LoadStage();
             stages.Add(sID, sMap);
-            sMap.GenerateMap();
             if (sMap.IsEntrance())
             {
+                sMap.GenerateMap(combatController);
                 currentStage = sMap;
                 sMap.gameObject.SetActive(true);
             }

@@ -14,6 +14,7 @@ public class HeroController : MonoBehaviour
 
     [HideInInspector]
     public bool follow = false;
+    public Map currentStage;
 
     // --- States ---
     public HeroState state = HeroState.idleState;
@@ -21,7 +22,6 @@ public class HeroController : MonoBehaviour
     // --- Utils ---
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
-
 
     // Start is called before the first frame update
     void Start()
