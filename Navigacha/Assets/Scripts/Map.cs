@@ -14,6 +14,10 @@ public class Map : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject heroSpawnPrefab;
 
+    [HideInInspector]
+    public int remainingWaves = 0;
+
+
     GameObject[,] map = new GameObject[Helpers.MapUtils.ROWS, Helpers.MapUtils.COLS];
     Stage stage;
 
@@ -42,6 +46,7 @@ public class Map : MonoBehaviour
     {
         combatController.enemies.Clear();
         int heroCount = 0;
+        remainingWaves = stage.GetWavesNumber();
         foreach (var square in stage.squares)
         {
             Vector2Int position = square.Key;
@@ -64,12 +69,11 @@ public class Map : MonoBehaviour
                 go = Instantiate(enemyPrefab, this.transform);
                 EnemyController e = go.GetComponent<EnemyController>();
                 e.stage = this;
-                combatController.enemies.Add(e);
+                e.SetCombatController(combatController);
                 // TODO: Add appropriate components to go
             }
             else if (square.Value[0].Equals('P'))
             {
-                // TODO: Program actual hero spawn
                 go = combatController.heroes[heroCount++].gameObject;
                 go.GetComponent<HeroController>().currentStage = this;
                 go.SetActive(true);
@@ -80,6 +84,27 @@ public class Map : MonoBehaviour
         combatController.gameObject.SetActive(true);
     }
 
+    public void SpawnEnemies(CombatController combatController)
+    {
+        combatController.enemies.Clear();
+        foreach (var square in stage.squares)
+        {
+            Vector2Int position = square.Key;
+            GameObject go = obstaclePrefab;
+            if (square.Value[0].Equals('E'))
+            {
+                // TODO: Select correct enemy prefab
+                go = Instantiate(enemyPrefab, this.transform);
+                EnemyController e = go.GetComponent<EnemyController>();
+                e.stage = this;
+                e.SetCombatController(combatController);
+                // TODO: Add appropriate components to go
+            }
+            go.transform.position = Helpers.MapUtils.SquareToWorldCoords(position.x, position.y);
+            map[position.y, position.x] = go;
+        }
+        combatController.gameObject.SetActive(true);
+    }
     public GameObject GetGameObjectInSquare (Vector2Int position)
     {
         return map[position.y, position.x];

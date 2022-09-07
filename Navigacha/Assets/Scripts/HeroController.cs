@@ -22,6 +22,7 @@ public class HeroController : MonoBehaviour
     // --- Utils ---
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
+    private bool readyToDamage = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,17 @@ public class HeroController : MonoBehaviour
             Helpers.IUnit unit = collision.gameObject.GetComponent<Helpers.IUnit>();
             if (unit != null)
             {
-                unit.TakeBasicAttack(1, collision.contacts[0].normal, heroClass);
+                readyToDamage = true;
+                unit.TakeBasicAttack(collision.contacts[0].normal, heroClass);
+            }
+        }
+        else if (readyToDamage)
+        {
+            Helpers.IUnit unit = collision.gameObject.GetComponent<Helpers.IUnit>();
+            if (unit != null)
+            {
+                readyToDamage = false;
+                unit.TakeDamage(1);
             }
         }
     }

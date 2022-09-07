@@ -67,7 +67,8 @@ namespace Helpers
 {
     public interface IUnit
     {
-        void TakeBasicAttack(float damage, Vector3 direction, Class heroClass);
+        void TakeBasicAttack(Vector3 direction, Class heroClass);
+        void TakeDamage(float damage);
     }
 
     class MapUtils

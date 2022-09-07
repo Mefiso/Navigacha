@@ -8,6 +8,11 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
     public float hp;
     public Map stage;
 
+    private CombatController combatController;
+    private bool canReceiveDamage = false;
+    private const float damageTickThreshold = 0.33F;
+    private float damageTickTimer = 0.0F;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +22,32 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
     // Update is called once per frame
     void Update()
     {
+        if (hp <= 0.0F)
+        {
+            // TODO: Trigger death animation
+            combatController.enemies.Remove(this);
+            Destroy(this.gameObject);
+        }
 
+        if (!canReceiveDamage)
+        {
+            damageTickTimer += Time.deltaTime;
+            if (damageTickTimer >= damageTickThreshold)
+            {
+                damageTickTimer = 0.0F;
+                canReceiveDamage = true;
+            }
+        }
     }
 
-    public void TakeBasicAttack(float damage, Vector3 direction, Class heroClass)
+    public void SetCombatController(CombatController c)
     {
-        hp -= damage;
+        combatController = c;
+        combatController.enemies.Add(this);
+    }
+
+    public void TakeBasicAttack(Vector3 direction, Class heroClass)
+    {
         Vector2Int origin = Helpers.MapUtils.WorldToSquareCoords(transform.position);
         switch (heroClass)
         {
@@ -34,8 +59,19 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
                 transform.position -= direction;
                 stage.Move(origin, Helpers.MapUtils.WorldToSquareCoords(transform.position));
                 break;
+            case Class.SPELLSLINGER:
+
             default:
                 break;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (canReceiveDamage)
+        {
+            hp -= damage;
+            canReceiveDamage = false;
         }
     }
 

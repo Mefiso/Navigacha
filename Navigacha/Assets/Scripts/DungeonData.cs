@@ -45,6 +45,11 @@ class Stage
         waveSpawnPoints = new List<int>[nWaves];
     }
 
+    public int GetWavesNumber()
+    {
+        return nWaves;
+    }
+
     public void MakeEntrance()
     {
         isEntrance = true;

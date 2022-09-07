@@ -32,7 +32,23 @@ public class DungeonMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(combatController.enemies.Count == 0)
+        {
+            foreach (var hero in heroes)
+            {
+                hero.follow = false;
+                hero.transform.position = Helpers.MapUtils.PositionToGrid(hero.transform.position);
+            }
+            combatController.gameObject.SetActive(false);
+            if (--currentStage.remainingWaves <= 0)
+            {
+                // TODO: Stage selector
+            }
+            else
+            {
+                currentStage.SpawnEnemies(combatController);
+            }
+        }
     }
 
     void LoadStages()

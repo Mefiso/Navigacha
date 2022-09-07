@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6792600869027408687}
   m_Layer: 0
   m_Name: Rance
-  m_TagString: Untagged
+  m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   speed: 0
   heroClass: 0
   follow: 0
+  currentStage: {fileID: 0}
 --- !u!61 &6792600869027408686
 BoxCollider2D:
   m_ObjectHideFlags: 0
