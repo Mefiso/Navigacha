@@ -8,7 +8,8 @@ public class CombatController : MonoBehaviour
     {
         MOVING_PHASE,
         ARTS_PHASE,
-        ENEMY_PHASE
+        ENEMY_PHASE,
+        COMBAT_FINISHED
     }
 
     public HeroController[] heroes = new HeroController[4];

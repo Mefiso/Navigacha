@@ -96,6 +96,10 @@ class Stage
         connections.Add(sID);
     }
 
+    public List<int> GetConnections()
+    {
+        return connections;
+    }
 }
 
 [Serializable]

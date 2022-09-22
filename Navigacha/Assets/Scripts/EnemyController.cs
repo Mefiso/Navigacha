@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
 
     private CombatController combatController;
     private bool canReceiveDamage = false;
-    private const float damageTickThreshold = 0.33F;
+    private const float damageTickThreshold = 0.2F;
     private float damageTickTimer = 0.0F;
 
     // Start is called before the first frame update
@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
         {
             // TODO: Trigger death animation
             combatController.enemies.Remove(this);
+            stage.RemoveObjectFromPosition(Helpers.MapUtils.WorldToSquareCoords(transform.position));
             Destroy(this.gameObject);
         }
 

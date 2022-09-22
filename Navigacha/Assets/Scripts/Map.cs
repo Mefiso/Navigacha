@@ -21,7 +21,6 @@ public class Map : MonoBehaviour
     GameObject[,] map = new GameObject[Helpers.MapUtils.ROWS, Helpers.MapUtils.COLS];
     Stage stage;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +38,7 @@ public class Map : MonoBehaviour
         {
             string line = sr.ReadLine();
             stage = JsonUtility.FromJson<Stage>(line);
+
         }
     }
 
@@ -101,7 +101,21 @@ public class Map : MonoBehaviour
                 // TODO: Add appropriate components to go
             }
             go.transform.position = Helpers.MapUtils.SquareToWorldCoords(position.x, position.y);
-            map[position.y, position.x] = go;
+
+            GameObject occupiedBy = GetGameObjectInSquare(position);
+            float delta = 0.0F;
+            while (occupiedBy && (occupiedBy.tag.Equals("Hero")))
+            {
+                position = Helpers.MapUtils.WorldToSquareCoords(go.transform.position) + new Vector2Int((int)Mathf.Cos(delta), (int)Mathf.Sin(delta));
+                delta += Mathf.PI / 2;
+                if (position.x >= 0 && position.x < Helpers.MapUtils.COLS &&
+                    position.y >= 0 && position.y < Helpers.MapUtils.ROWS)
+                {
+                    occupiedBy = GetGameObjectInSquare(position);
+                }
+            }
+            map[position.y, position.x] = occupiedBy;
+            go.transform.position = Helpers.MapUtils.SquareToWorldCoords(position.x, position.y);
         }
         combatController.gameObject.SetActive(true);
     }
@@ -125,6 +139,10 @@ public class Map : MonoBehaviour
         map[destination.y, destination.x] = map[origin.y, origin.x];
         map[origin.y, origin.x] = null;
     }
+
+    public void ConnectWith(int sID) => stage.ConnectWith(sID);
+
+    public List<int> GetConnections() => stage.GetConnections();
 
     public bool IsEntrance() => stage.IsEntrance();
 }
