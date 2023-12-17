@@ -14,7 +14,7 @@ public class HeroController : MonoBehaviour
 
     [HideInInspector]
     public bool follow = false;
-    public Map currentStage;
+    public StageMap currentStage;
 
     // --- States ---
     public HeroState state = HeroState.idleState;
@@ -47,7 +47,7 @@ public class HeroController : MonoBehaviour
             if (unit != null)
             {
                 readyToDamage = true;
-                unit.TakeBasicAttack(collision.contacts[0].normal, heroClass);
+                unit.TakeBasicAttack(collision.contacts[0].normal * Helpers.MapUtils.SQUARE_SIZE, heroClass);
             }
         }
         else if (readyToDamage)
@@ -69,7 +69,7 @@ public class HeroController : MonoBehaviour
         {
             mousePos.x = transform.position.x;
         }
-         if (Mathf.Abs(mousePos.y) > Helpers.MapUtils.V_BOUNDARY)
+         if (mousePos.y < Helpers.MapUtils.B_BOUNDARY || mousePos.y > Helpers.MapUtils.T_BOUNDARY)
         {
             mousePos.y = transform.position.y;
         }

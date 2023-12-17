@@ -1,1 +1,172 @@
-{"ID":729245388,"squares":{"keys":[{"x":1,"y":2},{"x":1,"y":3},{"x":5,"y":2},{"x":5,"y":3},{"x":3,"y":10},{"x":3,"y":9},{"x":2,"y":9},{"x":2,"y":10},{"x":4,"y":9},{"x":4,"y":10},{"x":0,"y":6},{"x":2,"y":6},{"x":3,"y":6},{"x":4,"y":6},{"x":6,"y":6},{"x":5,"y":8},{"x":1,"y":8},{"x":3,"y":2},{"x":3,"y":3},{"x":5,"y":0},{"x":1,"y":0},{"x":3,"y":0},{"x":3,"y":1}],"values":["E","E","E","E","E","E","E","E","E","E","H","H","H","H","H","O","O","O","O","P","P","P","P"]},"dungeonID":1823497115,"nWaves":2,"isExit":true,"isEntrance":false,"enemyIDs":[],"interactables":[{"movable":false,"trigger":1,"effect":{"key":"D","value":10.0}},{"movable":false,"trigger":1,"effect":{"key":"D","value":10.0}},{"movable":false,"trigger":1,"effect":{"key":"D","value":10.0}},{"movable":false,"trigger":1,"effect":{"key":"D","value":10.0}},{"movable":false,"trigger":1,"effect":{"key":"D","value":10.0}}]}
+{
+  "ID": 729245388,
+  "squares": {
+    "keys": [
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 10
+      },
+      {
+        "x": 3,
+        "y": 9
+      },
+      {
+        "x": 2,
+        "y": 9
+      },
+      {
+        "x": 2,
+        "y": 10
+      },
+      {
+        "x": 4,
+        "y": 9
+      },
+      {
+        "x": 4,
+        "y": 10
+      },
+      {
+        "x": 0,
+        "y": 6
+      },
+      {
+        "x": 2,
+        "y": 6
+      },
+      {
+        "x": 3,
+        "y": 6
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 6,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 8
+      },
+      {
+        "x": 1,
+        "y": 8
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      }
+    ],
+    "values": [
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "H",
+      "H",
+      "H",
+      "H",
+      "H",
+      "O",
+      "O",
+      "O",
+      "O",
+      "P",
+      "P",
+      "P",
+      "P"
+    ]
+  },
+  "dungeonID": 1823497115,
+  "nWaves": 2,
+  "isExit": true,
+  "isEntrance": false,
+  "enemyIDs": [
+  ],
+  "interactables": [
+    {
+      "movable": false,
+      "trigger": 1,
+      "effect": {
+        "key": "D",
+        "value": 10.0
+      }
+    },
+    {
+      "movable": false,
+      "trigger": 1,
+      "effect": {
+        "key": "D",
+        "value": 10.0
+      }
+    },
+    {
+      "movable": false,
+      "trigger": 1,
+      "effect": {
+        "key": "D",
+        "value": 10.0
+      }
+    },
+    {
+      "movable": false,
+      "trigger": 1,
+      "effect": {
+        "key": "D",
+        "value": 10.0
+      }
+    },
+    {
+      "movable": false,
+      "trigger": 1,
+      "effect": {
+        "key": "D",
+        "value": 10.0
+      }
+    }
+  ]
+}

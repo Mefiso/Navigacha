@@ -33,14 +33,23 @@ public class MovableState : HeroState
                 Vector2Int squareCoords = Helpers.MapUtils.WorldToSquareCoords(hero.transform.position);
                 GameObject go = hero.currentStage.GetGameObjectInSquare(squareCoords);
                 float delta = 0.0F;
+                int lap = 0;
                 while (go && (go.tag.Equals("Enemy") || go.tag.Equals("Hero") || go.tag.Equals("Obstacle")))
                 {
-                    squareCoords = Helpers.MapUtils.WorldToSquareCoords(hero.transform.position) + new Vector2Int((int)Mathf.Cos(delta), (int)Mathf.Sin(delta));
-                    delta += Mathf.PI / 2;
-                    if (squareCoords.x >=0 && squareCoords.x < Helpers.MapUtils.COLS &&
-                        squareCoords.y >=0 && squareCoords.y < Helpers.MapUtils.ROWS)
+                    int xShift = Mathf.CeilToInt(Mathf.Cos(delta)) + lap;
+                    int yShift = Mathf.CeilToInt(Mathf.Sin(delta)) + lap;
+                    squareCoords = Helpers.MapUtils.WorldToSquareCoords(hero.transform.position) + new Vector2Int(xShift, yShift);
+                    if (squareCoords.x >= 0 && squareCoords.x < Helpers.MapUtils.COLS &&
+                        squareCoords.y >= 0 && squareCoords.y < Helpers.MapUtils.ROWS)
                     {
                         go = hero.currentStage.GetGameObjectInSquare(squareCoords);
+                    }
+
+                    delta += Mathf.PI / 4;
+                    if (delta == 2*Mathf.PI)
+                    {
+                        delta = 0.0F;
+                        ++lap;
                     }
                 }
                 hero.currentStage.AddToPosition(hero.gameObject, squareCoords);

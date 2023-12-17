@@ -6,11 +6,11 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
 {
 
     public float hp;
-    public Map stage;
+    public const float damageTickThreshold = 0.2F;
 
+    private StageMap stage;
     private CombatController combatController;
     private bool canReceiveDamage = false;
-    private const float damageTickThreshold = 0.2F;
     private float damageTickTimer = 0.0F;
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
         if (hp <= 0.0F)
         {
             // TODO: Trigger death animation
-            combatController.enemies.Remove(this);
+            combatController.loadedEnemies.Remove(this);
             stage.RemoveObjectFromPosition(Helpers.MapUtils.WorldToSquareCoords(transform.position));
             Destroy(this.gameObject);
         }
@@ -44,8 +44,10 @@ public class EnemyController : MonoBehaviour, Helpers.IUnit
     public void SetCombatController(CombatController c)
     {
         combatController = c;
-        combatController.enemies.Add(this);
+        combatController.loadedEnemies.Add(this);
     }
+
+    public void SetStage(StageMap s) => stage = s;
 
     public void TakeBasicAttack(Vector3 direction, Class heroClass)
     {

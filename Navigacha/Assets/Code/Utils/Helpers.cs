@@ -73,34 +73,40 @@ namespace Helpers
 
     class MapUtils
     {
-        public const float SQUARE_SIZE = 1.0f;
-        public const int L_BOUNDARY = -3;
-        public const int R_BOUNDARY = 4;
-        public const int V_BOUNDARY = 6;
+        public const float SQUARE_SIZE = 0.8f;
+        public const float L_BOUNDARY = (-3.0f * SQUARE_SIZE);
+        public const float R_BOUNDARY = (4.0f * SQUARE_SIZE);
+        public const float T_BOUNDARY = (4.0f * SQUARE_SIZE);
+        public const float B_BOUNDARY = (-5.0f * SQUARE_SIZE);
         public const int MAX_ENEMIES = 10;
-        public const int ROWS = V_BOUNDARY * 2;
-        public const int COLS = (R_BOUNDARY - L_BOUNDARY);
+        public const int ROWS = (int)((T_BOUNDARY - B_BOUNDARY) / SQUARE_SIZE);
+        public const int COLS = (int)((R_BOUNDARY - L_BOUNDARY) / SQUARE_SIZE);
         public const int N_SQUARES = ROWS * COLS;
 
         // Returns the 2D world position of a square.
         static public Vector2 SquareToWorldCoords(int x, int y)
         {
             return new Vector2(L_BOUNDARY + (x + 0.5f) * SQUARE_SIZE,
-                           V_BOUNDARY - (y + 0.5f) * SQUARE_SIZE);
+                           T_BOUNDARY - (y + 0.5f) * SQUARE_SIZE);
         }
 
         // Gets the square corrdinates in a given position
         static public Vector2Int WorldToSquareCoords(Vector2 position)
         {
             return new Vector2Int((int)Mathf.Floor((position.x - L_BOUNDARY) / SQUARE_SIZE),
-                                (int)Mathf.Floor((V_BOUNDARY - position.y) / SQUARE_SIZE));
+                                (int)Mathf.Floor((T_BOUNDARY - position.y) / SQUARE_SIZE));
         }
 
         // Centers a position in the corresponding square
-        static public Vector3 PositionToGrid (Vector3 position)
+        static public Vector3 PositionToGrid(Vector3 position)
         {
-            return new Vector3(Mathf.Floor(position.x) + 0.5f*SQUARE_SIZE,
-                               Mathf.Floor(position.y) + 0.5f*SQUARE_SIZE,
+            float xShift = Mathf.Abs(L_BOUNDARY);
+            float yShift = Mathf.Abs(B_BOUNDARY);
+            Vector2 shiftedPosition = new Vector2(position.x + xShift, position.y + yShift);
+            float closestXLine = shiftedPosition.x - (shiftedPosition.x % SQUARE_SIZE) - xShift;
+            float closestYLine = shiftedPosition.y - (shiftedPosition.y % SQUARE_SIZE) - yShift;
+            return new Vector3(closestXLine + 0.5f*SQUARE_SIZE,
+                               closestYLine + 0.5f*SQUARE_SIZE,
                                0);
         }
     }

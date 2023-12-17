@@ -13,7 +13,9 @@ public class CombatController : MonoBehaviour
     }
 
     public HeroController[] heroes = new HeroController[4];
-    public List<EnemyController> enemies;
+
+    [HideInInspector]
+    public List<EnemyController> loadedEnemies;
 
     private CombatPhase phase;
 
