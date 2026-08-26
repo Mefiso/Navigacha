@@ -40,17 +40,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1505210104583663070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6e8d41caf87a249a77d9e007f3a05f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f622ef61635838449fb1a198f3c4373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonGO: {fileID: 0}
-  entrancePrefab: {fileID: 0}
-  exitPrefab: {fileID: 0}
-  roomPrefab: {fileID: 0}
-  stagePrefab: {fileID: 0}
+  entrancePrefab: {fileID: 6644281912884732914, guid: 32f59737dda2a9942b386c4d2180e052, type: 3}
+  exitPrefab: {fileID: 9081162739094415438, guid: eaf37e2dd8a217f4a9ae3cb5b094b6c6, type: 3}
+  roomPrefab: {fileID: 30949544972681935, guid: def71b3e449655e4da969574c0dfba24, type: 3}
+  stagePrefab: {fileID: 6419121412659952636, guid: cd71737f9007db64cbacd8d5d5c14c99, type: 3}
   inputWaves: {fileID: 0}
   inputDungeon: {fileID: 0}
   obstaclePrefab: {fileID: 1964111637300742553, guid: 6676fef9b80b9b14fbf41260a72c4cd1, type: 3}
   hazardPrefab: {fileID: 4627279278968598099, guid: 4d739f46ec30dc24f8214356f1ebf974, type: 3}
   enemyPrefab: {fileID: 2564191398061521979, guid: 94ded8f8446dc2b4a82778f80aa009de, type: 3}
-  heroSpawnPrefab: {fileID: 0}
+  heroSpawnPrefab: {fileID: 608529874677567617, guid: 72dc10501c153864bac26e1d558f8863, type: 3}
